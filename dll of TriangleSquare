@@ -1,0 +1,108 @@
+using System;
+namespace TrianlgeSquare
+{
+    public class TriangleSquare
+    {
+        public double Square { get; }
+        public TriangleSquare(dynamic sides)
+        {
+            int countOFArguments = sides.Length;
+            switch (countOFArguments)
+            {
+                case 3:
+                    Square = SquareOfTriangle(sides);
+                    break;
+                default:
+                    throw new Exception("Данных недостаточно или они отсутствуют");
+
+            }
+        }
+        public TriangleSquare(params dynamic[] sides)
+        {
+            int countOFArguments = sides.Length;
+            switch (countOFArguments)
+            {
+                case 3:
+                    Square = SquareOfTriangle(sides[0], sides[1], sides[2]);
+                    break;
+                default:
+                    throw new Exception("Данных недостаточно или они отсутствуют");
+
+            }
+        }
+        /*public TriangleSquare(List<T> sides)
+        {
+            if (sides.Count < 3 || sides.Count > 3)
+                throw new Exception("Данных недостаточно или они отсутствуют");
+            else
+                Square = SquareOfTriangle(sides);
+
+        }*/
+        private dynamic SquareOfTriangle(dynamic a, dynamic b, dynamic c)
+        {
+            IsItATriangle(a, b, c);
+            dynamic perimter = a + b + c;
+            dynamic Halfperimetr = perimter / 2;
+            return Math.Sqrt(Halfperimetr * (Halfperimetr - a) * (Halfperimetr - b) * (Halfperimetr - c));
+        }
+        private dynamic SquareOfTriangle(dynamic sides)
+        {
+            IsItATriangle(sides);
+            dynamic perimter = sides[0] + sides[1] + sides[2];
+            dynamic Halfperimetr = perimter / 2;
+            return Math.Sqrt(Halfperimetr * (Halfperimetr - sides[0]) * (Halfperimetr - sides[1]) * (Halfperimetr - sides[2])); ;
+        }
+        private void IsItATriangle(dynamic a, dynamic b, dynamic c)
+        {
+            dynamic max;
+            if ((a > b) && (a > c))
+            {
+                max = a;
+                if (Math.Pow(max, 2) != Math.Pow(c, 2) + Math.Pow(b, 2))
+                    throw new Exception("Не является треугольником");
+                return;
+            }
+            else if ((b > a) && (b > c))
+            {
+                max = b;
+                if (Math.Pow(max, 2) != Math.Pow(c, 2) + Math.Pow(a, 2))
+                    throw new Exception("Не является треугольником");
+                return;
+            }
+            else
+            {
+                max = c;
+                if (Math.Pow(max, 2) != Math.Pow(b, 2) + Math.Pow(a, 2))
+                    throw new Exception("Не является треугольником");
+                return;
+            }
+        }
+        private void IsItATriangle(dynamic sides)
+        {
+            dynamic max;
+            if ((sides[0] > sides[1]) && (sides[0] > sides[2]))
+            {
+                max = sides[0];
+                if (Math.Pow(max, 2) != Math.Pow(sides[1], 2) + Math.Pow(sides[2], 2))
+                    throw new Exception("Не является треугольником");
+                return;
+            }
+            else if ((sides[1] > sides[0]) && (sides[1] > sides[2]))
+            {
+                max = sides[1];
+                if (Math.Pow(max, 2) != Math.Pow(sides[2], 2) + Math.Pow(sides[0], 2))
+                    throw new Exception("Не является треугольником");
+                return;
+            }
+            else
+            {
+                max = sides[2];
+                if (Math.Pow(max, 2) != Math.Pow(sides[0], 2) + Math.Pow(sides[1], 2))
+                    throw new Exception("Не является треугольником");
+                return;
+            }
+        }
+    }
+}
+
+
