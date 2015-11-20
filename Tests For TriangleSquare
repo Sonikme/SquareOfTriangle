@@ -1,0 +1,58 @@
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TrianlgeSquare;
+
+namespace TestsForTriangleSquare
+{
+    [TestClass]
+    public class Test_TriangleSquare_Class
+    {
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "Данных недостаточно или они отсутствуют")]
+        public void Constructor_NotMuchOfArgumentsWithArray_Exception()
+        {
+            int[] l = { 1, 2, 3, 4};
+
+            TriangleSquare square = new TriangleSquare(l);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "Данных недостаточно или они отсутствуют")]
+        public void Constructor_NotMuchOfArgumentsWithNum_Exception()
+        {
+            TriangleSquare square = new TriangleSquare(1,2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "Не является треугольником")]
+        public void IsItATriangle_TallyWithNotriangleValueWithArrya_Exception()
+        {
+            int[] l = { 1, 2, 3 };
+            TriangleSquare sq = new TriangleSquare(l);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "Не является треугольником")]
+        public void IsItATriangle_TallyWithNotriangleValueWithNum_Exception()
+        {
+            TriangleSquare sq = new TriangleSquare(1,2,3);
+        }
+
+        [TestMethod]
+        public void SquareOfTriangle_CorrectDataWithArray_CorrectSquare()
+        {
+            float[] data = { 3, 4, 5 };
+            TriangleSquare sq = new TriangleSquare(data);
+            Assert.AreEqual(6, sq.Square);
+        }
+
+        [TestMethod]
+        public void SquareOfTriangle_CorrectDataWithNum_CorrectSquare()
+        {
+            TriangleSquare sq = new TriangleSquare(3.0, 4.0, 5.0);
+            Assert.AreEqual(6, sq.Square);
+        }
+
+    }
+}
